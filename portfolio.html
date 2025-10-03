@@ -1,0 +1,655 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Developer Portfolio | Laravel & Vue.js Specialist</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/vue@3.2.31/dist/vue.global.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+        <style>
+            :root {
+                --primary: #4f46e5;
+                --primary-dark: #4338ca;
+                --secondary: #6b7280;
+                --light: #f9fafb;
+                --dark: #1f2937;
+                --success: #10b981;
+            }
+            
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Inter', sans-serif;
+            }
+            
+            body {
+                background-color: var(--light);
+                color: var(--dark);
+                line-height: 1.6;
+            }
+            
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+            
+            /* Navigation */
+            nav {
+                background-color: rgba(255, 255, 255, 0.95);
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1000;
+                backdrop-filter: blur(8px);
+            }
+            
+            .nav-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem 0;
+            }
+            
+            .logo {
+                font-weight: 700;
+                font-size: 1.5rem;
+                color: var(--primary);
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .nav-links {
+                display: flex;
+                gap: 2rem;
+            }
+            
+            .nav-links a {
+                text-decoration: none;
+                color: var(--dark);
+                font-weight: 500;
+                transition: color 0.3s;
+            }
+            
+            .nav-links a:hover {
+                color: var(--primary);
+            }
+            
+            .mobile-menu-btn {
+                display: none;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                cursor: pointer;
+                color: var(--dark);
+            }
+            
+            /* Hero Section */
+            .hero {
+                padding: 10rem 0 4rem;
+                text-align: center;
+                background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
+            }
+            
+            .hero-content {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            
+            .hero h1 {
+                font-size: 3.5rem;
+                margin-bottom: 1rem;
+                background: linear-gradient(90deg, var(--primary), #7c3aed);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            
+            .hero p {
+                font-size: 1.25rem;
+                color: var(--secondary);
+                margin-bottom: 2rem;
+            }
+            
+            .btn {
+                display: inline-block;
+                padding: 0.75rem 1.5rem;
+                background-color: var(--primary);
+                color: white;
+                border-radius: 0.5rem;
+                text-decoration: none;
+                font-weight: 500;
+                transition: all 0.3s;
+                border: none;
+                cursor: pointer;
+            }
+            
+            .btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+                background-color: var(--primary-dark);
+            }
+            
+            .btn-outline {
+                background-color: transparent;
+                border: 2px solid var(--primary);
+                color: var(--primary);
+            }
+            
+            .btn-outline:hover {
+                background-color: var(--primary);
+                color: white;
+            }
+            
+            /* Portfolio Section */
+            .portfolio {
+                padding: 5rem 0;
+            }
+            
+            .section-title {
+                text-align: center;
+                margin-bottom: 3rem;
+                font-size: 2.25rem;
+            }
+            
+            .section-title span {
+                color: var(--primary);
+            }
+            
+            .projects {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+                gap: 2rem;
+            }
+            
+            .project-card {
+                background: white;
+                border-radius: 1rem;
+                overflow: hidden;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s;
+            }
+            
+            .project-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            }
+            
+            .project-img {
+                height: 200px;
+                background: linear-gradient(120deg, #4f46e5 0%, #7c3aed 100%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 3rem;
+            }
+            
+            .project-content {
+                padding: 1.5rem;
+            }
+            
+            .project-title {
+                font-size: 1.25rem;
+                margin-bottom: 0.5rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .project-desc {
+                color: var(--secondary);
+                margin-bottom: 1rem;
+            }
+            
+            .project-tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            .tag {
+                background-color: #eef2ff;
+                padding: 0.25rem 0.75rem;
+                border-radius: 9999px;
+                font-size: 0.875rem;
+                color: var(--primary);
+                font-weight: 500;
+            }
+            
+            /* About Section */
+            .about {
+                padding: 5rem 0;
+                background-color: white;
+            }
+            
+            .about-content {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+                align-items: center;
+            }
+            
+            .skills {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem;
+                margin-top: 1.5rem;
+            }
+            
+            .skill {
+                background-color: var(--light);
+                padding: 0.5rem 1rem;
+                border-radius: 0.5rem;
+                font-weight: 500;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .skill i {
+                color: var(--primary);
+            }
+            
+            /* Services Section */
+            .services {
+                padding: 5rem 0;
+            }
+            
+            .services-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 2rem;
+            }
+            
+            .service-card {
+                background: white;
+                padding: 2rem;
+                border-radius: 1rem;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s;
+                text-align: center;
+            }
+            
+            .service-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            }
+            
+            .service-icon {
+                font-size: 2.5rem;
+                color: var(--primary);
+                margin-bottom: 1rem;
+            }
+            
+            /* Contact Section */
+            .contact {
+                padding: 5rem 0;
+                background-color: white;
+            }
+            
+            .contact-form {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
+            
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                font-weight: 500;
+            }
+            
+            .form-group input,
+            .form-group textarea {
+                width: 100%;
+                padding: 0.875rem;
+                border: 1px solid #d1d5db;
+                border-radius: 0.5rem;
+                font-size: 1rem;
+                transition: border-color 0.3s;
+            }
+            
+            .form-group input:focus,
+            .form-group textarea:focus {
+                outline: none;
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+            }
+            
+            .form-group textarea {
+                min-height: 150px;
+                resize: vertical;
+            }
+            
+            /* Footer */
+            footer {
+                background-color: var(--dark);
+                color: white;
+                padding: 3rem 0 2rem;
+            }
+            
+            .footer-content {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .footer-logo {
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin-bottom: 1rem;
+                color: white;
+            }
+            
+            .social-links {
+                display: flex;
+                gap: 1.5rem;
+                margin: 1.5rem 0;
+            }
+            
+            .social-links a {
+                color: white;
+                font-size: 1.5rem;
+                transition: color 0.3s;
+            }
+            
+            .social-links a:hover {
+                color: var(--primary);
+            }
+            
+            .footer-bottom {
+                text-align: center;
+                padding-top: 2rem;
+                border-top: 1px solid #374151;
+            }
+            
+            /* Responsive */
+            @media (max-width: 768px) {
+                .about-content {
+                    grid-template-columns: 1fr;
+                }
+                
+                .hero h1 {
+                    font-size: 2.5rem;
+                }
+                
+                .nav-links {
+                    display: none;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    right: 0;
+                    background-color: white;
+                    flex-direction: column;
+                    padding: 1rem;
+                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                }
+                
+                .nav-links.active {
+                    display: flex;
+                }
+                
+                .mobile-menu-btn {
+                    display: block;
+                }
+                
+                .projects {
+                    grid-template-columns: 1fr;
+                }
+            }
+            
+            /* Animation */
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            
+            .animate-fade-in {
+                animation: fadeIn 0.6s ease-out forwards;
+            }
+            
+            .delay-1 { animation-delay: 0.2s; }
+            .delay-2 { animation-delay: 0.4s; }
+            .delay-3 { animation-delay: 0.6s; }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <!-- Navigation -->
+            <nav>
+                <div class="container nav-container">
+                    <div class="logo">
+                        <i class="fas fa-code"></i>
+                        DevPortfolio
+                    </div>
+                    <div class="nav-links" :class="{ active: mobileMenuOpen }">
+                        <a href="#home" @click="mobileMenuOpen = false">Home</a>
+                        <a href="#portfolio" @click="mobileMenuOpen = false">Work</a>
+                        <a href="#about" @click="mobileMenuOpen = false">About</a>
+                        <a href="#services" @click="mobileMenuOpen = false">Services</a>
+                        <a href="#contact" @click="mobileMenuOpen = false">Contact</a>
+                    </div>
+                    <button class="mobile-menu-btn" @click="mobileMenuOpen = !mobileMenuOpen">
+                        <i class="fas" :class="mobileMenuOpen ? 'fa-times' : 'fa-bars'"></i>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Hero Section -->
+            <section id="home" class="hero">
+                <div class="container hero-content">
+                    <h1 class="animate-fade-in">Laravel & Vue.js Developer</h1>
+                    <p class="animate-fade-in delay-1">I create modern, responsive web applications with clean code and exceptional user experiences.</p>
+                    <div class="animate-fade-in delay-2">
+                        <a href="#portfolio" class="btn">View My Work</a>
+                        <a href="#contact" class="btn btn-outline" style="margin-left: 1rem;">Contact Me</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Portfolio Section -->
+            <section id="portfolio" class="portfolio">
+                <div class="container">
+                    <h2 class="section-title">Featured <span>Projects</span></h2>
+                    <div class="projects">
+                        <div class="project-card animate-fade-in" v-for="project in projects" :key="project.id">
+                            <div class="project-img">
+                                <i :class="project.icon"></i>
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title">
+                                    <i class="fas fa-folder"></i>
+                                    {{ project.title }}
+                                </h3>
+                                <p class="project-desc">{{ project.description }}</p>
+                                <div class="project-tags">
+                                    <span class="tag" v-for="tag in project.tags" :key="tag">{{ tag }}</span>
+                                </div>
+                                <a :href="project.link" class="btn">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="about">
+                <div class="container">
+                    <h2 class="section-title">About <span>Me</span></h2>
+                    <div class="about-content">
+                        <div class="animate-fade-in">
+                            <h3>Who I Am</h3>
+                            <p>I'm a full-stack developer with 5+ years of experience specializing in Laravel and Vue.js development. I create robust, scalable web applications with clean code and intuitive user interfaces.</p>
+                            <p>When I'm not coding, you can find me contributing to open-source projects, writing technical articles, or exploring new technologies in the ever-evolving web development landscape.</p>
+                        </div>
+                        <div class="animate-fade-in delay-1">
+                            <h3>My Skills</h3>
+                            <div class="skills">
+                                <span class="skill" v-for="skill in skills" :key="skill">
+                                    <i class="fas fa-check"></i>
+                                    {{ skill }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Section -->
+            <section id="services" class="services">
+                <div class="container">
+                    <h2 class="section-title">My <span>Services</span></h2>
+                    <div class="services-grid">
+                        <div class="service-card animate-fade-in">
+                            <div class="service-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3>Web Development</h3>
+                            <p>Custom web applications built with Laravel and Vue.js, tailored to your specific business needs.</p>
+                        </div>
+                        <div class="service-card animate-fade-in delay-1">
+                            <div class="service-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3>Responsive Design</h3>
+                            <p>Websites that look great and work perfectly on all devices, from desktops to smartphones.</p>
+                        </div>
+                        <div class="service-card animate-fade-in delay-2">
+                            <div class="service-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <h3>API Development</h3>
+                            <p>RESTful API design and implementation with Laravel for web and mobile applications.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="contact">
+                <div class="container">
+                    <h2 class="section-title">Get In <span>Touch</span></h2>
+                    <form class="contact-form" @submit.prevent="submitForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" v-model="contactForm.name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" v-model="contactForm.email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" v-model="contactForm.message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer>
+                <div class="container">
+                    <div class="footer-content">
+                        <div>
+                            <div class="footer-logo">
+                                <i class="fas fa-code"></i>
+                                DevPortfolio
+                            </div>
+                            <p>Creating modern web experiences with Laravel and Vue.js.</p>
+                        </div>
+                        <div>
+                            <h3>Connect with me</h3>
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-github"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-dev"></i></a>
+                            </div>
+                        </div>
+                        <div>
+                            <h3>Contact Info</h3>
+                            <p>Email: hello@devportfolio.com</p>
+                            <p>Phone: +1 (123) 456-7890</p>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <p>&copy; 2023 DevPortfolio. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <script>
+            const { createApp, ref } = Vue;
+            
+            createApp({
+                setup() {
+                    const mobileMenuOpen = ref(false);
+                    
+                    const projects = ref([
+                        {
+                            id: 1,
+                            title: "E-commerce Platform",
+                            description: "A full-stack e-commerce solution built with Laravel and Vue.js with payment integration and admin dashboard.",
+                            tags: ["Laravel", "Vue.js", "MySQL", "Stripe"],
+                            link: "#",
+                            icon: "fas fa-shopping-cart"
+                        },
+                        {
+                            id: 2,
+                            title: "Task Management App",
+                            description: "A productivity application for managing tasks and projects with real-time updates and team collaboration.",
+                            tags: ["Vue.js", "Laravel", "WebSockets", "Tailwind CSS"],
+                            link: "#",
+                            icon: "fas fa-tasks"
+                        },
+                        {
+                            id: 3,
+                            title: "Weather Dashboard",
+                            description: "Real-time weather information dashboard with interactive charts and location-based forecasts.",
+                            tags: ["Vue.js", "Chart.js", "API", "Geolocation"],
+                            link: "#",
+                            icon: "fas fa-cloud-sun"
+                        }
+                    ]);
+                    
+                    const skills = ref([
+                        "Laravel", "Vue.js", "PHP", "JavaScript", "HTML/CSS", 
+                        "Tailwind CSS", "MySQL", "RESTful APIs", "Git", "Docker",
+                        "Webpack", "Redis", "AWS", "Responsive Design"
+                    ]);
+                    
+                    const contactForm = ref({
+                        name: "",
+                        email: "",
+                        message: ""
+                    });
+                    
+                    const submitForm = () => {
+                        // In a real app, this would send data to a Laravel backend
+                        alert(`Thank you ${contactForm.value.name} for your message! I'll get back to you soon.`);
+                        contactForm.value = { name: "", email: "", message: "" };
+                    };
+                    
+                    return {
+                        mobileMenuOpen,
+                        projects,
+                        skills,
+                        contactForm,
+                        submitForm
+                    };
+                }
+            }).mount('#app');
+        </script>
+    </body>
+    </html>
