@@ -28,24 +28,24 @@ export default {
     const experiences = ref([
       {
         id: 1,
-        date: "2022 - Present",
-        title: "Senior Full-Stack Developer",
-        company: "Tech Innovations Inc.",
-        description: "Leading development of AI-powered web applications and mentoring junior developers."
+        date: "2023 - Present",
+        title: "Freelance Full-Stack Developer",
+        company: "Upwork - Personal Quiz Project",
+        description: "Developing an interactive quiz platform with real-time scoring, user authentication, and analytics dashboard."
       },
       {
         id: 2,
-        date: "2020 - 2022",
-        title: "Frontend Developer",
-        company: "Digital Solutions LLC",
-        description: "Developed responsive user interfaces and integrated with backend APIs."
+        date: "2022 - 2023",
+        title: "Full-Stack Developer",
+        company: "Webpenter",
+        description: "Built responsive web applications, implemented RESTful APIs, and collaborated with cross-functional teams to deliver high-quality software solutions."
       },
       {
         id: 3,
-        date: "2018 - 2020",
-        title: "Junior Web Developer",
-        company: "WebCraft Studio",
-        description: "Built and maintained websites for various clients using modern web technologies."
+        date: "2021 - 2022",
+        title: "Junior Developer / Intern",
+        company: "Skylab BWP",
+        description: "Assisted in developing and maintaining web applications, fixed bugs, and implemented new features under senior developer guidance."
       }
     ])
 
