@@ -13,7 +13,7 @@
           <h3>Connect with me</h3>
           <div class="social-links">
             <a href="https://github.com/malikumarfarooq"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.linkedin.com/in/muhammadumarfaooq54/"><i class="fab fa-linkedin"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
             <a href="#"><i class="fab fa-dev"></i></a>
           </div>
