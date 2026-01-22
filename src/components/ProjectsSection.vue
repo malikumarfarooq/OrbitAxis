@@ -79,7 +79,7 @@ export default {
         title: "Real Estate Solutions",
         description: "Full-stack real estate platform with property listings, search functionality, and agent management system built with Laravel and Vue.js.",
         tags: ["Laravel", "Vue.js", "MySQL", "RESTful APIs", "Tailwind CSS"],
-        link: "#",
+        link: "https://buy.webpenter.com/",
         icon: "fas fa-home"
       }
     ])
